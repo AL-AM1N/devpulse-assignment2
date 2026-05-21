@@ -1,17 +1,13 @@
-import express, {
-  type Application,
-  type Request,
-  type Response,
-} from "express";
-import config from "./config/index";
+import app from "./app";
+import config from "./config";
+import { initDB } from "./db";
 
-const app: Application = express();
+const main = () => {
+  initDB();
 
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from TypeScript Express!");
-});
-
-app.listen(config.port, () => {
+  app.listen(config.port, () => {
     console.log(`Server is running at port: ${config.port}`);
-});
+  });
+};
+
+main();
