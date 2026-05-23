@@ -7,7 +7,7 @@ Built with Node.js, Express, TypeScript, PostgreSQL, and JWT Authentication.
 
 # Live URL
 
-Add your live backend URL here:
+live backend URL here:
 
 ```bash
 https://devpulse-assignment2-lilac.vercel.app/
