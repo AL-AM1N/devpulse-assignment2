@@ -10,7 +10,7 @@ Built with Node.js, Express, TypeScript, PostgreSQL, and JWT Authentication.
 Add your live backend URL here:
 
 ```bash
-https://your-live-url.com
+https://devpulse-assignment2-lilac.vercel.app/
 ```
 
 ---
@@ -25,7 +25,7 @@ https://your-live-url.com
 - Delete Issues (Maintainer Only)
 - Filter & Sort Issues
 - Secure Password Hashing using bcrypt
-- PostgreSQL Database Integration
+- PostgreSQL(NeonDB) Database Integration
 - Structured API Response Format
 - Global Error Handling
 
@@ -39,17 +39,11 @@ https://your-live-url.com
 - TypeScript
 
 ## Database
-- PostgreSQL
+- PostgreSQL (NeonDB)
 
 ## Authentication
 - JWT (jsonwebtoken)
 - bcryptjs
-
-## Other Tools
-- dotenv
-- cors
-- nodemon
-- ts-node-dev
 
 ---
 
@@ -81,7 +75,7 @@ src/
 ## 1. Clone Repository
 
 ```bash
-git clone <your-github-repo-url>
+git clone <https://github.com/AL-AM1N/devpulse-assignment2>
 ```
 
 ---
@@ -99,9 +93,9 @@ npm install
 ```env
 PORT=5000
 
-DATABASE_URL=your_postgresql_database_url
+DATABASE_URL=postgresql_database_url
 
-JWT_SECRET=your_jwt_secret
+JWT_SECRET=jwt_secret
 ```
 
 ---
@@ -204,7 +198,7 @@ Access:
 Use JWT token in request headers:
 
 ```http
-Authorization: Bearer YOUR_TOKEN
+Authorization: YOUR_TOKEN
 ```
 
 ---
