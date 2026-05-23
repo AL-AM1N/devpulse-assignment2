@@ -70,6 +70,7 @@ const getSingleIssue = async (req: Request, res: Response) => {
   }
 };
 
+// upadate issue
 const updateIssue = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -94,9 +95,30 @@ const updateIssue = async (req: Request, res: Response) => {
     });
   }
 };
+
+// delete issue
+const deleteIssue = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await issuesService.deleteIssueIntoDB(id as string);
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Issue updated successfully",
+    });
+  } catch (error: any) {
+    sendResponse(res, {
+      statusCode: 500,
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const issuesController = {
   createIssue,
   getAllIssues,
   getSingleIssue,
   updateIssue,
+  deleteIssue,
 };

@@ -7,7 +7,11 @@ import auth from "../../middleware/auth";
 const router = Router();
 
 // create issue
-router.post("/", auth, issuesController.createIssue);
+router.post(
+  "/",
+  auth("contributor", "maintainer"),
+  issuesController.createIssue,
+);
 
 // get all issues
 router.get("/", issuesController.getAllIssues);
@@ -16,6 +20,13 @@ router.get("/", issuesController.getAllIssues);
 router.get("/:id", issuesController.getSingleIssue);
 
 // update issue
-router.patch("/:id", auth, issuesController.updateIssue);
+router.patch(
+  "/:id",
+  auth("contributor", "maintainer"),
+  issuesController.updateIssue,
+);
+
+// delete single issue
+router.delete("/:id", auth("maintainer"), issuesController.deleteIssue);
 
 export const issuesRoute = router;

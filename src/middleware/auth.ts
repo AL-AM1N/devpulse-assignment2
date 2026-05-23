@@ -2,39 +2,51 @@ import type { NextFunction, Request, Response } from "express";
 
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../config";
+import sendResponse from "../utils/sendResponse";
 
+const auth = (...roles: string[]) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.headers.authorization;
 
-const auth = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const token = req.headers.authorization;
+      // check token
+      if (!token) {
+        return sendResponse(res, {
+          statusCode: 401,
+          success: false,
+          message: "Unauthorized access",
+          errors: "No token provided",
+        });
+      }
 
-    // check token exists
-    if (!token) {
-      return res.status(401).json({
+      // verify token
+      const decoded = jwt.verify(
+        token,
+        config.jwt_secret as string,
+      ) as JwtPayload;
+
+      req.user = decoded;
+
+      // role check
+      if (roles.length && !roles.includes(decoded.role)) {
+        return sendResponse(res, {
+          statusCode: 403,
+          success: false,
+          message: "Forbidden access",
+          errors: "You are not authorized for this action",
+        });
+      }
+
+      next();
+    } catch (error: any) {
+      sendResponse(res, {
+        statusCode: 401,
         success: false,
-        message: "Unauthorized access",
+        message: "Invalid token",
+        errors: error.message,
       });
     }
-
-    // verify token
-    const decoded = jwt.verify(
-      token,
-      config.jwt_secret as string,
-    ) as JwtPayload;
-
-    req.user = decoded;
-
-    next();
-  } catch (error: any) {
-    res.status(401).json({
-      success: false,
-      message: "Invalid token",
-    });
-  }
+  };
 };
 
 export default auth;
