@@ -1,4 +1,5 @@
 import { pool } from "../../db";
+import { USER_ROLE } from "../../types";
 
 const createIssueIntoDB = async (
   payload: {
@@ -161,7 +162,7 @@ const updateIssueIntoDB = async (
   const issue = issueResult.rows[0];
 
   // check role
-  if (user.role === "contributor") {
+  if (user.role === USER_ROLE.contributor) {
     // own issue check
     if (issue.reporter_id !== user.id) {
       throw new Error("You can update only your own issue");
