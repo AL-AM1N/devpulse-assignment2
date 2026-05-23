@@ -5,6 +5,7 @@ import express, {
 } from "express";
 import { authRoute } from "./modules/auth/auth.route";
 import { issuesRoute } from "./modules/issues/issues.route";
+import globalErrorHandler from "./middleware/globalErrorHandler";
 
 const app: Application = express();
 
@@ -17,8 +18,11 @@ app.use("/api/auth", authRoute);
 
 app.use("/api/issues", issuesRoute);
 
-// app.get("/", (req: Request, res: Response) => {
-//   res.send("Hello from TypeScript Express!");
-// });
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello this is assignment 2 backend server!");
+});
+
+// global error handling middleware
+app.use(globalErrorHandler);
 
 export default app;
