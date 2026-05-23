@@ -137,6 +137,7 @@ const getSingleIssueFromDB = async (id: string) => {
   };
 };
 
+// update issue
 const updateIssueIntoDB = async (
   id: string,
   payload: {

@@ -10,7 +10,7 @@ const router = Router();
 // create issue
 router.post(
   "/",
-  auth("contributor", "maintainer"),
+  auth(USER_ROLE.contributor, USER_ROLE.maintainer),
   issuesController.createIssue,
 );
 

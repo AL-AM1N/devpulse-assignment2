@@ -26,6 +26,7 @@ const auth = (...roles: ROLES[]) => {
         config.jwt_secret as string,
       ) as JwtPayload;
 
+
       req.user = decoded;
 
       // role check

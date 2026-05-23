@@ -100,17 +100,20 @@ const updateIssue = async (req: Request, res: Response) => {
 const deleteIssue = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const result = await issuesService.deleteIssueIntoDB(id as string);
+
+    await issuesService.deleteIssueIntoDB(id as string);
+
     sendResponse(res, {
       statusCode: 200,
       success: true,
-      message: "Issue updated successfully",
+      message: "Issue deleted successfully",
     });
   } catch (error: any) {
     sendResponse(res, {
       statusCode: 500,
       success: false,
       message: error.message,
+      errors: error.message,
     });
   }
 };
